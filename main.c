@@ -16,7 +16,8 @@ int main() {
         printf("1 Criar nova tarefa.\n");
         printf("2 Listar tarefas.\n");
         printf("3 Deletar tarefas.\n");
-        printf("4 Sair e salvar.\n");
+        printf("4 Criar arquivo de texto.\n");
+        printf("5 Sair e salvar.\n");
         int escolha;
         scanf("%d", &escolha); // Lê a escolha do usuário
         limpa();
@@ -37,10 +38,14 @@ int main() {
                 deletarTarefa(lista, &quantidadeDeTarefas, pos);
                 break;
             case 4:
+
+                arquivotxt(lista,quantidadeDeTarefas);
+                break;
+            case 5:
                 // Chama a função para salvar as tarefas no arquivo e sai do programa
                 salvarTarefas(lista, quantidadeDeTarefas);
                 return 0;
-            case 5:
+            case 6:
 
             default:
                 printf("Escolha inválida. Tente novamente.\n");
