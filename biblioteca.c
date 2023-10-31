@@ -375,6 +375,98 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas){
         }
     }
 };
+void alterarTarefas(struct tarefa lista[], int quantidadeDeTarefas){
+    while(1){
+        printf("Seja bem vindo ao menu de atualizar tarefas.\n");
+        printf("Temos algumas opcoes aqui, o que voce deseja?.\n");
+        printf("Selecione a opcao!.\n");
+        printf("1.Listar tarefas!\n");
+        printf("2.Atualizar tarefas!\n");
+        printf("0.Sair do menu!\n");
+        int choose;
+        scanf("%d",&choose);
+        limpa();
+
+        if(choose == 1){
+            for(int x = 0 ; x < quantidadeDeTarefas;x++){
+                listarIndividual(lista,x);
+            }
+        }
+        if(choose == 2){
+            while(1){
+                printf("Olá, neste menu voce pode escolher o que alterar da tarefa desejada!\n");
+                printf("Me diga qual a posicao da tarefa que voce deseja alterar!(-1 para sair)\n");
+                int posicao;
+                scanf("%d",&posicao);
+                if(posicao <0){
+                    break;
+                }
+                limpa();
+
+                printf("A tarefa selecionada é a da posicao %d\n",posicao);
+                printf("Agora me diga o que voce deseja alterar!\n");
+                printf("Voce tem essas opcoes:\n");
+                printf("1.Prioridade.\n");
+                printf("2.Estado.\n");
+                printf("3.Categoria.\n");
+                printf("4.Descrição.\n");
+                printf("5.Desistir.\n");
+                printf("Qual você escolhe?\n");
+                int opcaodetroca;
+
+                scanf("%d",&opcaodetroca);
+                limpa();
+
+                if(opcaodetroca == 1){
+                    printf("Qual vai ser a nova prioridade desta tarefa?\n");
+                    int newpriority;
+                    scanf("%d",&newpriority);
+                    limpa();
+
+                    lista[posicao].prioridade = newpriority;
+                }
+                if(opcaodetroca == 2){
+                    printf("Qual vai ser o novo estado desta tarefa?\n");
+                    printf("0.Não realizado!\n");
+                    printf("1.Em andamento!\n");
+                    printf("2.Finalizado!\n");
+                    int newestate;
+                    scanf("%d",&newestate);
+                    limpa();
+
+                    lista[posicao].estado = newestate;
+                }
+                if(opcaodetroca == 3){
+                    printf("Qual vai ser a nova categoria desta tarefa?\n");
+
+                    char newcategorie[100];
+                    scanf("%100[^\n]s", &newcategorie);
+                    limpa();
+                    strcpy(lista[posicao].categoria,newcategorie);
+                }
+                if(opcaodetroca == 4){
+                    printf("Qual vai ser a nova descricao desta tarefa?\n");
+
+                    char newdesc[300];
+                    scanf("%300[^\n]s", &newdesc);
+                    limpa();
+                    strcpy(lista[posicao].desc,newdesc);
+                }
+                if(opcaodetroca == 0){
+                    break;
+                }
+
+            }
+        }
+        if(choose == 0){
+            break;
+        }
+
+    }
+
+
+}
+
 
 
 #include "biblioteca.h" // Inclui novamente o cabeçalho
