@@ -84,13 +84,29 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas) {
 
                     printf("Tarefa de Numero: %d \n", x);
                     printf("Prioridade: %d\n", lista[x].prioridade);
-                    printf("Descrição: %s", lista[x].desc);
+                    printf("Descrição: %s\n", lista[x].desc);
                     printf("Estado: %d\n", lista[x].estado);
                     printf("Categoria: %s\n", lista[x].categoria);
                     printf("\n");
                 }
             }
 
+        }
+        if(escolha == 3){
+            int priority;
+            printf("Digite a prioridade a ser buscada: \n");
+            scanf("%d",&priority);
+            for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
+                //até a quantidade de tarefas ja criadas
+                if(priority==lista[x].prioridade) {
+                    printf("Tarefa de Numero: %d \n", x);
+                    printf("Prioridade: %d\n", lista[x].prioridade);
+                    printf("Descrição: %s\n", lista[x].desc);
+                    printf("Estado: %d\n", lista[x].estado);
+                    printf("Categoria: %s\n", lista[x].categoria);
+                    printf("\n");
+                }
+            }
         }
         if(escolha == 0){
             printf("Saindo do menu!!\n");
@@ -112,6 +128,9 @@ void criarNovaTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int tamanh
         scanf("%300[^\n]s", &nova.desc);
         limpa();
         printf("Estado: ");
+        printf("0.Não realizado!\n");
+        printf("1.Em andamento!\n");
+        printf("2.Finalizado!\n");
         scanf("%d",&nova.estado);
         limpa();
         printf("Categoria: ");
