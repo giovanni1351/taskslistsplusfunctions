@@ -8,6 +8,12 @@
 #include "biblioteca.h"
 
 // Função para ler tarefas de um arquivo e carregá-las em uma lista
+void limpa(){
+    //função para arrumar o bug de pular um scanf
+    //ela vai limpar o buffer e arrumar o erro
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) { }
+}
 void lerTarefas(struct tarefa lista[], int *quantidadeDeTarefas) {
     FILE *arquivo = fopen("tarefas", "rb");//ele abre o arquivo como ler binario
     if (arquivo) {//se obter sucesso ele vai ler com o fread e armazenara no arquivo aberto
@@ -42,14 +48,137 @@ void deletarTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int pos) {
 
 // Função para listar as tarefas na lista
 void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas) {
-    for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
-        //até a quantidade de tarefas ja criadas
-        printf("Tarefa de Numero: %d \n", x);
-        printf("Prioridade: %d\n", lista[x].prioridade);
-        printf("Descrição: %s", lista[x].desc);
-        printf("Categoria: %s\n", lista[x].categoria);
-        printf("\n");
+    while(1){
+        printf("Selecione como deseja printar suas tarefas!\n");
+        printf("1.Listar por ordem de adição! \n");
+        printf("2.Listar por categoria!\n");
+        printf("3.Listar por prioridade!\n");
+        printf("4.Listar por estado!\n");
+        printf("5.Listar por prioridade e categoria!\n");
+        printf("0.Sair do menu de listar  \n");
+        int escolha;
+        scanf("%d",&escolha);
+        limpa();
+        if(escolha ==1) {
+            int encontrado =0;
+            for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
+                //até a quantidade de tarefas ja criadas
+                printf("Tarefa de Numero: %d \n", x);
+                printf("Prioridade: %d\n", lista[x].prioridade);
+                printf("Descrição: %s", lista[x].desc);
+                printf("Estado: %d\n", lista[x].estado);
+
+                printf("Categoria: %s\n", lista[x].categoria);
+                printf("\n");
+                encontrado =1;
+            }
+            if(encontrado ==0){
+                printf("Nenhuma tarefa encontrada!\n");
+            }
+        }
+        if(escolha == 2){
+            char categoria[100];
+            scanf("%100[^\n]s", &categoria);
+            limpa();
+            int encontrado =0;
+
+            for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
+                //até a quantidade de tarefas ja criadas
+                printf("%d\n",strcmp(lista[x].categoria,categoria));
+                if(strcmp(lista[x].categoria,categoria)==0) {
+
+
+                    printf("Tarefa de Numero: %d \n", x);
+                    printf("Prioridade: %d\n", lista[x].prioridade);
+                    printf("Descrição: %s\n", lista[x].desc);
+                    printf("Estado: %d\n", lista[x].estado);
+                    printf("Categoria: %s\n", lista[x].categoria);
+                    printf("\n");
+                    encontrado =1;
+                }
+            }
+            if(encontrado ==0){
+                printf("Nenhuma tarefa encontrada!\n");
+            }
+
+        }
+        if(escolha == 3){
+            int priority;
+            int encontrado =0;
+            printf("Digite a prioridade a ser buscada: \n");
+            scanf("%d",&priority);
+            for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
+                //até a quantidade de tarefas ja criadas
+                if(priority==lista[x].prioridade) {
+                    printf("Tarefa de Numero: %d \n", x);
+                    printf("Prioridade: %d\n", lista[x].prioridade);
+                    printf("Descrição: %s\n", lista[x].desc);
+                    printf("Estado: %d\n", lista[x].estado);
+                    printf("Categoria: %s\n", lista[x].categoria);
+                    printf("\n");
+                    encontrado =1;
+                }
+            }
+            if(encontrado ==0){
+                printf("Nenhuma tarefa encontrada!\n");
+            }
+        }
+        if(escolha == 4){
+            int estate;
+            int encontrado =0;
+            printf("Digite quais estados vão aparecer:\n");
+            printf("0.Não realizado!\n");
+            printf("1.Em andamento!\n");
+            printf("2.Finalizado!\n");
+            scanf("%d",&estate);
+            for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
+                //até a quantidade de tarefas ja criadas
+                if(estate==lista[x].estado) {
+                    printf("Tarefa de Numero: %d \n", x);
+                    printf("Prioridade: %d\n", lista[x].prioridade);
+                    printf("Descrição: %s\n", lista[x].desc);
+                    printf("Estado: %d\n", lista[x].estado);
+                    printf("Categoria: %s\n", lista[x].categoria);
+                    printf("\n");
+                    encontrado =1;
+                }
+            }
+            if(encontrado == 0){
+                printf("Nenhuma tarefa encontrada!\n");
+            }
+        }
+        if(escolha == 5){
+            int prioridade;
+            char categoria[100];
+            int encontrado =0;
+            printf("Digite a prioridade:\n");
+            scanf("%d",&prioridade);
+            limpa();
+            printf("Digite a categoria:\n");
+            scanf("%100[^\n]s", &categoria);
+            limpa();
+            for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
+                //até a quantidade de tarefas ja criadas
+                if(prioridade==lista[x].prioridade&& strcmp(lista[x].categoria,categoria)==0) {
+                    printf("Tarefa de Numero: %d \n", x);
+                    printf("Prioridade: %d\n", lista[x].prioridade);
+                    printf("Descrição: %s\n", lista[x].desc);
+                    printf("Estado: %d\n", lista[x].estado);
+                    printf("Categoria: %s\n", lista[x].categoria);
+                    printf("\n");
+                    encontrado =1;
+                }
+            }
+            if(encontrado == 0){
+                printf("Nenhuma tarefa encontrada!\n");
+            }
+        }
+        if(escolha == 0){
+            printf("Saindo do menu!!\n");
+            break;
+        }
     }
+
 }
 
 // Função para criar uma nova tarefa e adicioná-la à lista
@@ -59,19 +188,18 @@ void criarNovaTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int tamanh
         //agora daqui para baixo ele vai printar e recolher as informações
         printf("Prioridade: ");
         scanf("%d", &nova.prioridade);
+        limpa();
         printf("Descrição: ");
-        getchar(); // Limpa o buffer do teclado
-        if (fgets(nova.desc, sizeof(nova.desc), stdin)) {
-            printf("Você digitou: %s", nova.desc);
-        } else {
-            printf("Erro ao ler a linha.");
-        }
+        scanf("%300[^\n]s", &nova.desc);
+        limpa();
+        printf("Estado: ");
+        printf("0.Não realizado!\n");
+        printf("1.Em andamento!\n");
+        printf("2.Finalizado!\n");
+        scanf("%d",&nova.estado);
+        limpa();
         printf("Categoria: ");
-        if (fgets(nova.categoria, sizeof(nova.categoria), stdin)) {
-            printf("Você digitou: %s", nova.categoria);
-        } else {
-            printf("Erro ao ler a linha.");
-        }
+        scanf("%100[^\n]s", &nova.categoria);
 
         lista[*quantidadeDeTarefas] = nova;//declara a posição com a struct preechida
         (*quantidadeDeTarefas)++;//soma 1 na variavel q esta controlando a quantia de tarefas
