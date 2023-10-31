@@ -8,6 +8,7 @@ struct tarefa
 {
     int prioridade;
     char desc[300];
+    int estado;
     char categoria[100];
 };
 void lerTarefas(struct tarefa lista[], int *quantidadeDeTarefas);
@@ -15,5 +16,5 @@ void criarNovaTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int tamanh
 void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas);
 void deletarTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int pos);
 void salvarTarefas(struct tarefa lista[], int quantidadeDeTarefas);
-
+void limpa();
 #endif //PROJETOLISTADETAREFASSALVAEMBINARIO_BIBLIOTECA_H

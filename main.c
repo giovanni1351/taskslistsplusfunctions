@@ -19,7 +19,7 @@ int main() {
         printf("4 Sair e salvar.\n");
         int escolha;
         scanf("%d", &escolha); // Lê a escolha do usuário
-
+        limpa();
         switch (escolha) {
             case 1:
                 // Chama a função para criar uma nova tarefa
@@ -40,6 +40,8 @@ int main() {
                 // Chama a função para salvar as tarefas no arquivo e sai do programa
                 salvarTarefas(lista, quantidadeDeTarefas);
                 return 0;
+            case 5:
+
             default:
                 printf("Escolha inválida. Tente novamente.\n");
                 break;
