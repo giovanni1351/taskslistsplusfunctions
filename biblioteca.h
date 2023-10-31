@@ -16,5 +16,6 @@ void criarNovaTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int tamanh
 void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas);
 void deletarTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int pos);
 void salvarTarefas(struct tarefa lista[], int quantidadeDeTarefas);
+void listarIndividual(struct tarefa lista[],int position);
 void limpa();
 #endif //PROJETOLISTADETAREFASSALVAEMBINARIO_BIBLIOTECA_H

@@ -47,6 +47,23 @@ void deletarTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int pos) {
 }
 
 // Função para listar as tarefas na lista
+void listarIndividual(struct tarefa lista[],int position){
+    printf("Tarefa de Numero: %d \n", position);
+    printf("Prioridade: %d\n", lista[position].prioridade);
+    printf("Descrição: %s\n", lista[position].desc);
+    if(lista[position].estado == 0){
+        printf("Estado: Não realizado!\n");}
+    else if(lista[position].estado == 1){
+
+        printf("Estado: Em andamento!\n");}
+    else if(lista[position].estado == 2){
+
+        printf("Estado: Finalizado!\n");
+    }
+    printf("Estado: %d\n", lista[position].estado);
+    printf("Categoria: %s\n", lista[position].categoria);
+    printf("\n");
+}
 void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas) {
     while(1){
         printf("Selecione como deseja printar suas tarefas!\n");
@@ -63,13 +80,7 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas) {
             int encontrado =0;
             for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
                 //até a quantidade de tarefas ja criadas
-                printf("Tarefa de Numero: %d \n", x);
-                printf("Prioridade: %d\n", lista[x].prioridade);
-                printf("Descrição: %s", lista[x].desc);
-                printf("Estado: %d\n", lista[x].estado);
-
-                printf("Categoria: %s\n", lista[x].categoria);
-                printf("\n");
+                listarIndividual(lista,x);
                 encontrado =1;
             }
             if(encontrado ==0){
@@ -88,12 +99,7 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas) {
                 if(strcmp(lista[x].categoria,categoria)==0) {
 
 
-                    printf("Tarefa de Numero: %d \n", x);
-                    printf("Prioridade: %d\n", lista[x].prioridade);
-                    printf("Descrição: %s\n", lista[x].desc);
-                    printf("Estado: %d\n", lista[x].estado);
-                    printf("Categoria: %s\n", lista[x].categoria);
-                    printf("\n");
+                    listarIndividual(lista,x);
                     encontrado =1;
                 }
             }
@@ -110,12 +116,7 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas) {
             for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
                 //até a quantidade de tarefas ja criadas
                 if(priority==lista[x].prioridade) {
-                    printf("Tarefa de Numero: %d \n", x);
-                    printf("Prioridade: %d\n", lista[x].prioridade);
-                    printf("Descrição: %s\n", lista[x].desc);
-                    printf("Estado: %d\n", lista[x].estado);
-                    printf("Categoria: %s\n", lista[x].categoria);
-                    printf("\n");
+                    listarIndividual(lista,x);
                     encontrado =1;
                 }
             }
@@ -134,12 +135,7 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas) {
             for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
                 //até a quantidade de tarefas ja criadas
                 if(estate==lista[x].estado) {
-                    printf("Tarefa de Numero: %d \n", x);
-                    printf("Prioridade: %d\n", lista[x].prioridade);
-                    printf("Descrição: %s\n", lista[x].desc);
-                    printf("Estado: %d\n", lista[x].estado);
-                    printf("Categoria: %s\n", lista[x].categoria);
-                    printf("\n");
+                    listarIndividual(lista,x);
                     encontrado =1;
                 }
             }
@@ -160,12 +156,7 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas) {
             for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
                 //até a quantidade de tarefas ja criadas
                 if(prioridade==lista[x].prioridade&& strcmp(lista[x].categoria,categoria)==0) {
-                    printf("Tarefa de Numero: %d \n", x);
-                    printf("Prioridade: %d\n", lista[x].prioridade);
-                    printf("Descrição: %s\n", lista[x].desc);
-                    printf("Estado: %d\n", lista[x].estado);
-                    printf("Categoria: %s\n", lista[x].categoria);
-                    printf("\n");
+                    listarIndividual(lista,x);
                     encontrado =1;
                 }
             }
