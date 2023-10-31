@@ -38,12 +38,44 @@ void salvarTarefas(struct tarefa lista[], int quantidadeDeTarefas) {
 }
 
 // Função para deletar uma tarefa da lista
-void deletarTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int pos) {
-    for (int i = pos; i < (*quantidadeDeTarefas) - 1; i++) {
-        lista[i] = lista[i + 1];//ele vai pegar a tarefa do próximo indice e colocar no atual
-        //começando da posição inicial digitada
+void deletarTarefa(struct tarefa lista[], int *quantidadeDeTarefas) {
+    while(1){
+        printf("Seja bem vindo ao menu de deletar tarefas!\n");
+        printf("1.Listar tarefas!\n");
+        printf("2.Deletar tarefa!\n");
+        printf("0.Sair do menu de deletar tarefas!\n");
+        printf("Opcao: \n");
+        int choose;
+        scanf("%d",&choose);
+        if(choose == 1){
+            for(int x =0 ; x < (*quantidadeDeTarefas);x++){
+                listarIndividual(lista,x);
+            }
+        }
+        if(choose == 2) {
+            printf("Qual posição você deseja apagar?(-1 desistir)\n");
+            int pos;
+            scanf("%d", &pos); // Lê a posição da tarefa a ser deletada
+            // Chama a função para deletar a tarefa
+            if (pos > 0) {
+
+
+                for (int i = pos; i < (*quantidadeDeTarefas) - 1; i++) {
+                    lista[i] = lista[i + 1];//ele vai pegar a tarefa do próximo indice e colocar no atual
+                    //começando da posição inicial digitada
+                }
+                (*quantidadeDeTarefas)--;//ele diminui a quantidade de tarefas em 1 para q tenhamos o controle
+            }
+            else{
+                printf("Operação cancelada!\n");
+            }
+        }
+        if(choose == 0){
+            printf("Saindo do menu de deletar tarefas");
+            break;
+        }
     }
-    (*quantidadeDeTarefas)--;//ele diminui a quantidade de tarefas em 1 para q tenhamos o controle
+
 }
 
 // Função para listar as tarefas na lista
@@ -82,13 +114,13 @@ void listarIndividualarquivo(struct tarefa lista[],int position,FILE *arquivo){
 }
 void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
     while(1){
-        printf("Selecione como deseja printar suas tarefas!\n");
+        printf("Selecione como deseja printar suas tarefas no arquivo!\n");
         printf("1.Listar por ordem de adição! \n");
         printf("2.Listar por categoria!\n");
         printf("3.Listar por prioridade!\n");
         printf("4.Listar por estado!\n");
         printf("5.Listar por prioridade e categoria!\n");
-        printf("0.Sair do menu de listar  \n");
+        printf("0.Sair do menu de listar em arquivo  \n");
         int escolha;
         scanf("%d",&escolha);
         limpa();
@@ -104,6 +136,9 @@ void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
             fclose(arquivo);
             if(encontrado ==0){
                 printf("Nenhuma tarefa encontrada!\n");
+            }else{
+                printf("Arquivo gerado com sucesso!\n");
+
             }
         }
         if(escolha == 2){
@@ -120,8 +155,11 @@ void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
                 }
             }
             fclose(arquivo);
+
             if(encontrado ==0){
                 printf("Nenhuma tarefa encontrada!\n");
+            }else{
+                printf("Arquivo gerado com sucesso!\n");
             }
 
         }
@@ -142,6 +180,9 @@ void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
             fclose(arquivo);
             if(encontrado ==0){
                 printf("Nenhuma tarefa encontrada!\n");
+            }else{
+                printf("Arquivo gerado com sucesso!\n");
+
             }
         }
         if(escolha == 4){
@@ -164,6 +205,9 @@ void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
             fclose(arquivo);
             if(encontrado == 0){
                 printf("Nenhuma tarefa encontrada!\n");
+            }else{
+                printf("Arquivo gerado com sucesso!\n");
+
             }
         }
         if(escolha == 5){
@@ -188,6 +232,9 @@ void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
             fclose(arquivo);
             if(encontrado == 0){
                 printf("Nenhuma tarefa encontrada!\n");
+            }else{
+                printf("Arquivo gerado com sucesso!\n");
+
             }
         }
         if(escolha == 0){

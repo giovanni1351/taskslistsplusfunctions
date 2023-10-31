@@ -31,11 +31,8 @@ int main() {
                 listarTarefas(lista, quantidadeDeTarefas);
                 break;
             case 3:
-                printf("Qual posição você deseja apagar?\n");
-                int pos;
-                scanf("%d", &pos); // Lê a posição da tarefa a ser deletada
-                // Chama a função para deletar a tarefa
-                deletarTarefa(lista, &quantidadeDeTarefas, pos);
+
+                deletarTarefa(lista, &quantidadeDeTarefas);
                 break;
             case 4:
 
