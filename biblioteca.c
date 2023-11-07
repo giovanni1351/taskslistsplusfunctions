@@ -302,7 +302,6 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas){
             for (int ordem = 10; ordem >= 0; ordem--) {
                 for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
                     //até a quantidade de tarefas ja criadas
-                    printf("%d\n", strcmp(lista[x].categoria, categoria));
                     if (strcmp(lista[x].categoria, categoria) == 0 && lista[x].prioridade == ordem) {
                         listarIndividual(lista, x);
                         encontrado = 1;
