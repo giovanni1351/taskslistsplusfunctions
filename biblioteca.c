@@ -254,8 +254,10 @@ void criarNovaTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int tamanh
     if (*quantidadeDeTarefas < tamanhoMaximo) {
         struct tarefa nova;//cria uma struct vazia
         //agora daqui para baixo ele vai printar e recolher as informações
-        printf("Prioridade: ");
-        scanf("%d", &nova.prioridade);
+        do{
+            printf("Prioridade(1 a 10): ");
+            scanf("%d", &nova.prioridade);
+        }while(nova.prioridade<1 ||nova.prioridade>10);
         limpa();
         printf("Descrição: ");
         scanf("%300[^\n]s", &nova.desc);
