@@ -14,15 +14,16 @@ void limpa(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF) { }
 }
+
 void lerTarefas(struct tarefa lista[], int *quantidadeDeTarefas) {
     FILE *arquivo = fopen("tarefas", "rb");//ele abre o arquivo como ler binario
-    if (arquivo) {//se obter sucesso ele vai ler com o fread e armazenara no arquivo aberto
-        //as informaçoes ficarão na lista q foi passada como parametro
-        while (fread(&lista[*quantidadeDeTarefas], sizeof(struct tarefa), 1, arquivo) == 1) {
-            (*quantidadeDeTarefas)++;//ele vai ler de 1 em 1 até o fim do arquivo, a cada leitura ele soma 1 na quantidade de tarefas
-            //para manter o controle de tarefas
-        }
-        fclose(arquivo);//ele fecha o arquivo
+    if (arquivo) {
+        fseek(arquivo, 0, SEEK_END);
+        long tamanho_arquivo = ftell(arquivo);
+        rewind(arquivo);
+        *quantidadeDeTarefas = tamanho_arquivo / sizeof(struct tarefa);
+        fread(lista, sizeof(struct tarefa), *quantidadeDeTarefas, arquivo);
+        fclose(arquivo);
     }
 }
 
@@ -142,6 +143,7 @@ void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
             }
         }
         if(escolha == 2){
+
             char categoria[100];
             printf("Digite a categoria:\n");
             scanf("%100[^\n]s", &categoria);
@@ -170,9 +172,12 @@ void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
             int priority;
             FILE *arquivo = fopen("filtredbypriorities.txt","w");
 
+            do{
+
+                printf("Digite a prioridade a ser buscada(1 a 10): \n");
+                scanf("%d",&priority);
+            }while(priority<1||priority>10);
             int encontrado =0;
-            printf("Digite a prioridade a ser buscada: \n");
-            scanf("%d",&priority);
             for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
                 //até a quantidade de tarefas ja criadas
                 if(priority==lista[x].prioridade) {
@@ -213,15 +218,17 @@ void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
 
             }
         }
-        if(escolha == 5){
-            FILE *arquivo = fopen("filtredbycategoriesandpriorities.txt","w");
+        if(escolha == 5) {
+            FILE *arquivo = fopen("filtredbycategoriesandpriorities.txt", "w");
 
             int prioridade;
             char categoria[100];
-            int encontrado =0;
-            printf("Digite a prioridade:\n");
-            scanf("%d",&prioridade);
-            limpa();
+            int encontrado = 0;
+            do {
+                printf("Digite a prioridade:\n");
+                scanf("%d", &prioridade);
+                limpa();
+            }while(prioridade<1||prioridade>10);
             printf("Digite a categoria:\n");
             scanf("%100[^\n]s", &categoria);
             limpa();
@@ -253,8 +260,10 @@ void criarNovaTarefa(struct tarefa lista[], int *quantidadeDeTarefas, int tamanh
     if (*quantidadeDeTarefas < tamanhoMaximo) {
         struct tarefa nova;//cria uma struct vazia
         //agora daqui para baixo ele vai printar e recolher as informações
-        printf("Prioridade: ");
-        scanf("%d", &nova.prioridade);
+        do{
+            printf("Prioridade(1 a 10): ");
+            scanf("%d", &nova.prioridade);
+        }while(nova.prioridade<1 ||nova.prioridade>10);
         limpa();
         printf("Descrição: ");
         scanf("%300[^\n]s", &nova.desc);
@@ -320,8 +329,12 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas){
         if(escolha == 3){
             int priority;
             int encontrado =0;
-            printf("Digite a prioridade a ser buscada: \n");
+            do{
+
+            printf("Digite a prioridade a ser buscada(1 a 10): \n");
             scanf("%d",&priority);
+            }while(priority<1||priority>10);
+
             for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
                 //até a quantidade de tarefas ja criadas
                 if(priority==lista[x].prioridade) {
@@ -356,9 +369,11 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas){
             int prioridade;
             char categoria[100];
             int encontrado =0;
-            printf("Digite a prioridade:\n");
-            scanf("%d",&prioridade);
-            limpa();
+            do {
+                printf("Digite a prioridade(1 a 10):\n");
+                scanf("%d", &prioridade);
+                limpa();
+            }while(prioridade<1||prioridade>10);
             printf("Digite a categoria:\n");
             scanf("%100[^\n]s", &categoria);
             limpa();
