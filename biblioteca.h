@@ -19,5 +19,6 @@ void salvarTarefas(struct tarefa lista[], int quantidadeDeTarefas);
 void listarIndividual(struct tarefa lista[],int position);
 void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas);
 void listarIndividualarquivo(struct tarefa lista[],int position,FILE *arquivo);
+void alterarTarefas(struct tarefa lista[], int quantidadeDeTarefas);
 void limpa();
 #endif //PROJETOLISTADETAREFASSALVAEMBINARIO_BIBLIOTECA_H
