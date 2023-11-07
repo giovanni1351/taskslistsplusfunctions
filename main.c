@@ -42,7 +42,7 @@ int main() {
             case 5:
                 // Chama a função para salvar as tarefas no arquivo e sai do programa
                 alterarTarefas(lista, quantidadeDeTarefas);
-                return 0;
+                break;
             case 6:
                 salvarTarefas(lista, quantidadeDeTarefas);
                 return 0;

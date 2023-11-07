@@ -294,18 +294,19 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas){
                 printf("Nenhuma tarefa encontrada!\n");
             }
         }
-        if(escolha == 2){
+        if(escolha == 2) {
             char categoria[100];
             scanf("%100[^\n]s", &categoria);
             limpa();
-            int encontrado =0;
-
-            for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
-                //até a quantidade de tarefas ja criadas
-                printf("%d\n",strcmp(lista[x].categoria,categoria));
-                if(strcmp(lista[x].categoria,categoria)==0) {
-                    listarIndividual(lista,x);
-                    encontrado =1;
+            int encontrado = 0;
+            for (int ordem = 10; ordem >= 0; ordem--) {
+                for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
+                    //até a quantidade de tarefas ja criadas
+                    printf("%d\n", strcmp(lista[x].categoria, categoria));
+                    if (strcmp(lista[x].categoria, categoria) == 0 && lista[x].prioridade == ordem) {
+                        listarIndividual(lista, x);
+                        encontrado = 1;
+                    }
                 }
             }
             if(encontrado ==0){
@@ -395,7 +396,7 @@ void alterarTarefas(struct tarefa lista[], int quantidadeDeTarefas){
         if(choose == 2){
             while(1){
                 printf("Olá, neste menu voce pode escolher o que alterar da tarefa desejada!\n");
-                printf("Me diga qual a posicao da tarefa que voce deseja alterar!(-1 para sair)\n");
+                printf("Me diga qual a posicao da tarefa que voce deseja alterar!(-1 para voltar)\n");
                 int posicao;
                 scanf("%d",&posicao);
                 if(posicao <0){
