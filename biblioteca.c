@@ -14,15 +14,16 @@ void limpa(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF) { }
 }
+
 void lerTarefas(struct tarefa lista[], int *quantidadeDeTarefas) {
     FILE *arquivo = fopen("tarefas", "rb");//ele abre o arquivo como ler binario
-    if (arquivo) {//se obter sucesso ele vai ler com o fread e armazenara no arquivo aberto
-        //as informaçoes ficarão na lista q foi passada como parametro
-        while (fread(&lista[*quantidadeDeTarefas], sizeof(struct tarefa), 1, arquivo) == 1) {
-            (*quantidadeDeTarefas)++;//ele vai ler de 1 em 1 até o fim do arquivo, a cada leitura ele soma 1 na quantidade de tarefas
-            //para manter o controle de tarefas
-        }
-        fclose(arquivo);//ele fecha o arquivo
+    if (arquivo) {
+        fseek(arquivo, 0, SEEK_END);
+        long tamanho_arquivo = ftell(arquivo);
+        rewind(arquivo);
+        *quantidadeDeTarefas = tamanho_arquivo / sizeof(struct tarefa);
+        fread(lista, sizeof(struct tarefa), *quantidadeDeTarefas, arquivo);
+        fclose(arquivo);
     }
 }
 
