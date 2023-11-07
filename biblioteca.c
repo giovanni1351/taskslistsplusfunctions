@@ -143,15 +143,18 @@ void arquivotxt(struct tarefa lista[],int quantidadeDeTarefas){
         }
         if(escolha == 2){
             char categoria[100];
+            printf("Digite a categoria:\n");
             scanf("%100[^\n]s", &categoria);
             limpa();
             int encontrado =0;
             FILE *arquivo = fopen("filtredbycategories.txt","w");
-            for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
-                //até a quantidade de tarefas ja criadas
-                if(strcmp(lista[x].categoria,categoria)==0) {
-                    listarIndividualarquivo(lista,x,arquivo);
-                    encontrado =1;
+            for (int ordem = 10; ordem >= 0; ordem--) {
+                for (int x = 0; x < quantidadeDeTarefas; x++) {//ele vai começar do zero e vai
+                    //até a quantidade de tarefas ja criadas
+                    if (strcmp(lista[x].categoria, categoria) == 0 && lista[x].prioridade == ordem) {
+                        listarIndividualarquivo(lista, x, arquivo);
+                        encontrado = 1;
+                    }
                 }
             }
             fclose(arquivo);
@@ -296,6 +299,7 @@ void listarTarefas(struct tarefa lista[], int quantidadeDeTarefas){
         }
         if(escolha == 2) {
             char categoria[100];
+            printf("Digite a categoria:\n");
             scanf("%100[^\n]s", &categoria);
             limpa();
             int encontrado = 0;
