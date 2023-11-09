@@ -32,18 +32,19 @@ int main() {
                 listarTarefas(lista, quantidadeDeTarefas);
                 break;
             case 3:
-
+                //Chama a função para deletar tarefa
                 deletarTarefa(lista, &quantidadeDeTarefas);
                 break;
             case 4:
-
+                //Chama a função de exportar as tarefas por filtros
                 arquivotxt(lista,quantidadeDeTarefas);
                 break;
             case 5:
-                // Chama a função para salvar as tarefas no arquivo e sai do programa
+                //Chama a função de alterar as tarefas
                 alterarTarefas(lista, quantidadeDeTarefas);
                 break;
             case 6:
+                // Chama a função para salvar as tarefas no arquivo e sai do programa
                 salvarTarefas(lista, quantidadeDeTarefas);
                 return 0;
             default:
